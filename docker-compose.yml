@@ -1,0 +1,8 @@
+version: '3'
+services:
+  spring-server:
+    build:
+      context: .
+      dockerfile: remote.Dockerfile
+    ports:
+      - "8080:8080"
