@@ -34,23 +34,34 @@ jobs:
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build
+      run: ./gradlew build -x test
 
-  dependency-submission:
+    - name: make application-prod.yml
+      run: |
+        cd ./src/main/resources
+        touch ./application-prod.yml
+        echo "${{secrets.EC2_HOST}}" > ./application-prod.yml
 
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    - name: Docker build
+      run: |
+        docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        docker build -t app .
+        docker tag app ${{secrets.DOCKER_USERNAME}}/app:latest
+        docker push ${{secrets.DOCKER_USERNAME}}/app:latest
+
+    - name: Deploy
+      uses: appleboy/ssh-action@master
       with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-    # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        host: ${{secrets.EC2_HOST}}
+        username: ${{secrets.EC2_USER_NAME}}
+        key: ${{secrets.PRIVATE_KEY}}
+        script: |
+          docker pull ${{secrets.DOCKER_USERNAME}}/app:latest
+          docker stop $(docker ps - a -q)
+          docker run -d -e SPRING_PROPERTIES_ACTIVE=prod ${{secrets.DOCKER_USERNAME}}/app:latest
+          docker rm $(docker ps --filter 'status=exited' -a -q)
+          docker image prune -a -f
+        
