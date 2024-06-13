@@ -26,8 +26,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
-    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
+    - name: make database and aws properties
+      run: |
+        cd ./src/main/resources
+        touch database.properties
+        echo "${{secrets.DATABASE_PROPERTIES}}" >> database.properties
+        touch aws.properties
+        echo "${{secrets.AWS_PROPERTIES}}" >> aws.properties
+        
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
       
@@ -36,7 +42,7 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build -x test
-
+        
     - name: make application-prod.yml
       run: |
         cd ./src/main/resources
@@ -57,9 +63,14 @@ jobs:
         username: ${{secrets.EC2_USER_NAME}}
         key: ${{secrets.PRIVATE_KEY}}
         script: |
+          docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
           docker pull ${{secrets.DOCKER_USERNAME}}/app:latest
           docker stop $(docker ps -a -q)
           docker rm $(docker ps -a -q)
-          docker run -d -p 8080:8080 -e SPRING_PROPERTIES_ACTIVE=prod ${{secrets.DOCKER_USERNAME}}/app:latest
+          docker run -d -p 8080:8080 \
+            -e SPRING_PROPERTIES_ACTIVE=prod \
+            -e AWS_ACCESS_KEY_ID=${{secrets.AWS_ACCESS_KEY_ID}} \
+            -e AWS_SECRET_ACCESS_KEY=${{secrets.AWS_SECRET_ACCESS_KEY}} \
+            ${{secrets.DOCKER_USERNAME}}/app:latest
           docker image prune -a -f
         
