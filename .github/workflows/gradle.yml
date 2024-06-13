@@ -37,6 +37,14 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build -x test
 
+    - name: make database and aws properties
+      run: |
+        cd ./src/main/resources
+        touch database.properties
+        echo "${{secrets.DATABASE_PROPERTIES}}" >> database.properties
+        touch aws.properties
+        echo "${{secrets.AWS_PROPERTIES}}" >> aws.properties
+        
     - name: make application-prod.yml
       run: |
         cd ./src/main/resources
@@ -60,6 +68,10 @@ jobs:
           docker pull ${{secrets.DOCKER_USERNAME}}/app:latest
           docker stop $(docker ps -a -q)
           docker rm $(docker ps -a -q)
-          docker run -d -p 8080:8080 -e SPRING_PROPERTIES_ACTIVE=prod ${{secrets.DOCKER_USERNAME}}/app:latest
+          docker run -d -p 8080:8080 \
+            -e SPRING_PROPERTIES_ACTIVE=prod \
+            -e AWS_ACCESS_KEY_ID=${{secrets.AWS_ACCESS_KEY_ID}} \
+            -e AWS_SECRET_ACCESS_KEY=${{secrets.AWS_SECRET_ACCESS_KEY}} \
+            ${{secrets.DOCKER_USERNAME}}/app:latest
           docker image prune -a -f
         
