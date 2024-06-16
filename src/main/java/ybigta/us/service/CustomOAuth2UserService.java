@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import ybigta.us.domain.User;
-import ybigta.us.dto.Role;
 import java.util.Collections;
 import java.util.Map;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -53,6 +52,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 });
 
         httpSession.setAttribute("user", user);
+
+        // 액세스 토큰을 세션에 저장합니다.
+        String accessToken = userRequest.getAccessToken().getTokenValue();
+        httpSession.setAttribute("accessToken", accessToken);
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString())),
