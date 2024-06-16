@@ -1,4 +1,4 @@
-package ybigta.us.dto;
+package ybigta.us;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package ybigta.us.dto;
+package ybigta.us.domain;
 
 public enum Role {
 
