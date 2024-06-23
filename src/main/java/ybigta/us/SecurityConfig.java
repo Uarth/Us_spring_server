@@ -19,7 +19,14 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorizeRequests -> {
+
+                 /*//for SMScertification Testing
+                .authorizeRequests()
+                .anyRequest().permitAll() // 모든 요청에 대해 인증 비활성화
+                .and()
+                .csrf().disable(); // CSRF 비활성화 (테스트 목적)
+                */
+                    .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests.requestMatchers("/").permitAll();//모두에게 허용되는 페이지
                     authorizeRequests.requestMatchers("/login").permitAll(); // 모두에게 허용되는 페이지
                     authorizeRequests.requestMatchers("/user").hasRole("USER");//user role이 있어야지만 허용하도록
