@@ -41,10 +41,8 @@ public class LoginController {
     }
 
     //로그인 성공했을 때
-
     @GetMapping("/login/success")
     public String login_success() {
-
         return "login_success";
     }
 

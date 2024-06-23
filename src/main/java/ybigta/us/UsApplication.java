@@ -13,8 +13,15 @@ public class UsApplication {
 		Dotenv dotenv = Dotenv.configure().load();
 		System.setProperty("CLIENT_ID", dotenv.get("CLIENT_ID"));
 		System.setProperty("CLIENT_SECRET", dotenv.get("CLIENT_SECRET"));
+		System.setProperty("SMS_API_KEY", dotenv.get("SMS_API_KEY"));
+		System.setProperty("SMS_API_SECRET", dotenv.get("SMS_API_SECRET"));
+		System.setProperty("SMS_API_PROVIDER", dotenv.get("SMS_API_PROVIDER"));
+		System.setProperty("SMS_API_SENDER", dotenv.get("SMS_API_SENDER"));
+
+
+
+
+
 		SpringApplication.run(UsApplication.class, args);
-
-
 	}
 }
