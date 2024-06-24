@@ -54,6 +54,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         httpSession.setAttribute("user", user);
 
+        // 액세스 토큰을 세션에 저장합니다.
+        String accessToken = userRequest.getAccessToken().getTokenValue();
+        httpSession.setAttribute("accessToken", accessToken);
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString())),
                 oAuth2User.getAttributes(),

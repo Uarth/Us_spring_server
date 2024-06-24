@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Session Data</title>
+</head>
+<body>
+<h2>Session Data</h2>
+<div th:if="${user != null}">
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <p>Role: <span th:text="${user.role}"></span></p>
+</div>
+<div th:if="${user == null}">
+    <p>No user in session.</p>
+</div>
+<div th:if="${accessToken != null}">
+    <p>Access Token: <span th:text="${accessToken}"></span></p>
+</div>
+<a th:href="@{/session/invalidate}">Invalidate Session</a>
+</body>
+</html>

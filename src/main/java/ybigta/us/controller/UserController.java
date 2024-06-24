@@ -19,10 +19,12 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/users/new")
-    public User create(@RequestParam("name") String name, @RequestParam("email") String email) {
+    public User create(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("sex") Boolean sex,@RequestParam("phoneNumeber") String phoneNumber) {
         User user = new User();
         user.setName(name);
         user.setEmail(email);
+        user.setSex(sex);
+        user.setPhoneNumber(phoneNumber);
         return userService.join(user);
     }
 

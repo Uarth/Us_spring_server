@@ -19,6 +19,7 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
                  /*//for SMScertification Testing
                 .authorizeRequests()
                 .anyRequest().permitAll() // 모든 요청에 대해 인증 비활성화
