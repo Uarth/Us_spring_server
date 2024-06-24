@@ -1,6 +1,8 @@
 package ybigta.us.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ybigta.us.domain.User;
@@ -19,13 +21,10 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/users/new")
-    public User create(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("sex") Boolean sex,@RequestParam("phoneNumeber") String phoneNumber) {
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setSex(sex);
-        user.setPhoneNumber(phoneNumber);
-        return userService.join(user);
+    public User create(@RequestParam("name") String name, @RequestParam("sex") Boolean sex,@RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email) {
+
+        return userService.createUser(name, sex, phoneNumber, email);
+
     }
 
     @ResponseBody

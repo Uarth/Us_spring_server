@@ -11,6 +11,8 @@ import ybigta.us.domain.User;
 @RequestMapping("/session")
 public class SessionController {
 //Session 정보 확인용 페이지
+    //TODO
+    // get 빼고 /session/{userid} 구조로 변경하기
     @GetMapping("/get")
     public String getSession(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
