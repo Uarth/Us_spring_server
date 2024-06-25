@@ -6,17 +6,20 @@ import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequiredArgsConstructor
 public class SmsCertificationController {
 
     // 자체 default Service
     final DefaultMessageService messageService;
 
-    public SmsCertificationController() {
+    public SmsCertificationController(
+        @Value("${coolsms.api.key}") String apiKey,
+        @Value("${coolsms.api.secret}") String apiSecret,
+        @Value("${coolsms.api.provider}") String apiProvider) {
         // Message 전송 API KEY
-        this.messageService = NurigoApp.INSTANCE.initialize("${coolsms.api.key}", "${coolsms.api.secret}", "${coolsms.api.provider}");
+        this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, apiProvider);
     }
 
     // 메세지 전송 API
