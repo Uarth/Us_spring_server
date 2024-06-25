@@ -36,6 +36,10 @@ jobs:
 
     - name: make env file
       run: |
+        cd ./
+        touch .env
+        echo "${{secrets.ENV}}" >> .env
+        cd ./src/main/resources
         touch .env
         echo "${{secrets.ENV}}" >> .env
         
