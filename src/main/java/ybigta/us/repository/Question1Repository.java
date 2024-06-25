@@ -1,10 +1,11 @@
 package ybigta.us.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ybigta.us.domain.Question;
-import ybigta.us.dto.FeatureDao;
+import ybigta.us.domain.Question1;
+import ybigta.us.domain.Question2;
 import ybigta.us.dto.FeatureResponse;
 
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
-    FeatureDao save(FeatureResponse featureResponse);
+public interface Question1Repository extends JpaRepository<Question1, Integer> {
+    Question1 save(Question1 question1);
+
 }
