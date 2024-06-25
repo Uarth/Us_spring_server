@@ -3,8 +3,10 @@ package ybigta.us;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 
+@EnableAsync
 @SpringBootApplication
 public class UsApplication {
 
@@ -17,7 +19,7 @@ public class UsApplication {
 		System.setProperty("SMS_API_SECRET", dotenv.get("SMS_API_SECRET"));
 		System.setProperty("SMS_API_PROVIDER", dotenv.get("SMS_API_PROVIDER"));
 		System.setProperty("SMS_API_SENDER", dotenv.get("SMS_API_SENDER"));
-
+		System.setProperty("MODEL_SERVER_URL", dotenv.get("MODEL_SERVER_URL"));
 
 
 
