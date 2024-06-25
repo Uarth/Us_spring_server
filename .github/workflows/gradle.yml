@@ -34,7 +34,7 @@ jobs:
         touch aws.properties
         echo "${{secrets.AWS_PROPERTIES}}" >> aws.properties
 
-    - name: make env file
+    - name: write env file
       run: |
         cd ./
         touch .env
