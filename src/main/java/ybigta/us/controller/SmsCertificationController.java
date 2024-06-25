@@ -14,9 +14,10 @@ public class SmsCertificationController {
     final DefaultMessageService messageService;
 
     public SmsCertificationController(
-            @Value("${coolsms.api.key}") String apiKey,
-            @Value("${coolsms.api.secret}") String apiSecret,
-            @Value("${coolsms.api.provider}") String apiProvider) {
+        @Value("${coolsms.api.key}") String apiKey,
+        @Value("${coolsms.api.secret}") String apiSecret,
+        @Value("${coolsms.api.provider}") String apiProvider) {
+
         // Message 전송 API KEY
         this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, apiProvider);
     }
