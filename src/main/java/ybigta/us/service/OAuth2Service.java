@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class OAuth2Service {
-
+/* 개발과정에서 쓰게될수도, 아닐수도 있는데..우선 같이 커밋하고 안쓰게되면 지울게요
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String clientId;
 
@@ -61,4 +61,6 @@ public class OAuth2Service {
             cookie.setMaxAge(60 * 60); // 1 hour
             return cookie;
         }
+
+ */
     }
