@@ -3,12 +3,12 @@ package ybigta.us.dto;
 public class RecordDto {
     private String recordName;
     private String recordS3Url;
-    private Integer recordNumber;
+    private Integer questionNumber;
 
     public RecordDto(String recordName, String recordS3Url, Integer recordNumber) {
         this.recordName = recordName;
         this.recordS3Url = recordS3Url;
-        this.recordNumber = recordNumber;
+        this.questionNumber = recordNumber;
     }
     public RecordDto(String recordName, String recordS3Url) {
         this.recordName = recordName;
@@ -31,11 +31,11 @@ public class RecordDto {
         this.recordS3Url = recordS3Url;
     }
 
-    public Integer getRecordNumber() {
-        return recordNumber;
+    public Integer getQuestionNumber() {
+        return questionNumber;
     }
 
-    public void setRecordNumber(Integer recordNumber) {
-        this.recordNumber = recordNumber;
+    public void setQuestionNumber(Integer questionNumber) {
+        this.questionNumber = questionNumber;
     }
 }

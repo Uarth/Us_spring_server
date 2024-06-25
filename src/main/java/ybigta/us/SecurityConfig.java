@@ -21,7 +21,8 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
 
-                /*//for SMScertification Testing
+                /*
+                //for SMScertification Testing
                .authorizeRequests()
                .anyRequest().permitAll() // 모든 요청에 대해 인증 비활성화
                .and()
@@ -48,7 +49,6 @@ public class SecurityConfig {
                                         userInfoEndpoint.userService(customOAuth2UserService)
                                 )
                 );
-
         return http.build();
     }
 

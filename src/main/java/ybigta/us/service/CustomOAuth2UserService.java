@@ -44,6 +44,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             throw new OAuth2AuthenticationException("허용되지 않은 인증");
         }
 
+        //새로운 유저가 들어오면, 반드시 email, Role_user 부여하기
+
         User user = userRepository.findByEmail(email)
                 .orElseGet(() -> {
                     User newUser = new User();

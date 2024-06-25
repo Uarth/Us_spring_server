@@ -1,6 +1,5 @@
 package ybigta.us.controller;
 
-import lombok.RequiredArgsConstructor;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
@@ -18,6 +17,7 @@ public class SmsCertificationController {
         @Value("${coolsms.api.key}") String apiKey,
         @Value("${coolsms.api.secret}") String apiSecret,
         @Value("${coolsms.api.provider}") String apiProvider) {
+
         // Message 전송 API KEY
         this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, apiProvider);
     }
