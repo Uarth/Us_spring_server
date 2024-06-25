@@ -13,7 +13,6 @@ public class SmsCertificationController {
     // 자체 default Service
     final DefaultMessageService messageService;
 
-    public SmsCertificationController() {
     public SmsCertificationController(
             @Value("${coolsms.api.key}") String apiKey,
             @Value("${coolsms.api.secret}") String apiSecret,
