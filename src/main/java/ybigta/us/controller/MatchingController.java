@@ -26,11 +26,10 @@ public class MatchingController {
 
     @ResponseBody
     @GetMapping("/match")
-    public ResponseEntity<Map<String, Object>> match(/*HttpSession session*/) {
+    public ResponseEntity<Map<String, Object>> match(HttpSession session) {
 
-//        User user = (User) session.getAttribute("user");
-//        Integer userId = user.getId();
-        Integer userId = 6;
+        User user = (User) session.getAttribute("user");
+        Integer userId = user.getId();
         MatchingDto matchingDto = matchingWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("FAST/matching")
@@ -41,8 +40,8 @@ public class MatchingController {
         if (matchingDto != null) {
             Map<String, Object> responseBody = new HashMap<>();
             String username = userService.findUser((int) matchingDto.getUserid()).getName();
-            responseBody.put("reason", matchingDto.getExplain());
             responseBody.put("user_name", username);
+            responseBody.put("reason", matchingDto.getExplain());
             return ResponseEntity.ok(responseBody);
         } else {
             Map<String, Object> responseBody = new HashMap<>();

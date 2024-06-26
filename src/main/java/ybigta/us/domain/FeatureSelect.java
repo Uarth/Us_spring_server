@@ -36,6 +36,5 @@ public class FeatureSelect {
     private String featureValue5;
 
     @Column(name = "created_at")
-    @CreationTimestamp
     private LocalDateTime createdAt;
 }

@@ -10,5 +10,5 @@ public class MatchingDto {
     private int status;
     private String message;
     private double userid;
-    private String Explain;
+    private String explain;
 }
