@@ -8,6 +8,4 @@ import java.util.Optional;
 
 public interface FeatureSelectRepository extends JpaRepository<FeatureSelect, Integer> {
     List<FeatureSelect> findByUserId(Integer userId);
-    FeatureSelect save(FeatureSelect featureSelect);
-
 }

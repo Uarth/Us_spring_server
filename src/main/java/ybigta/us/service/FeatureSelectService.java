@@ -16,8 +16,7 @@ public class FeatureSelectService {
     public FeatureSelectService(FeatureSelectRepository featureSelectRepository) {
         this.featureSelectRepository = featureSelectRepository;
     }
-
-
+  
     public void saveFeatureSelection(int userId, Map<String, Object> featureData) {
         FeatureSelect featureSelect = new FeatureSelect();
         featureSelect.setUserId(userId);
