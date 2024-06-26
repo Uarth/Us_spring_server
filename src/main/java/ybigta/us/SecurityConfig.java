@@ -20,7 +20,6 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-
                 /*
                 //for SMScertification Testing
                .authorizeRequests()
