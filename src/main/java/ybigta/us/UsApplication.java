@@ -20,7 +20,7 @@ public class UsApplication {
 		System.setProperty("SMS_API_PROVIDER", dotenv.get("SMS_API_PROVIDER"));
 		System.setProperty("SMS_API_SENDER", dotenv.get("SMS_API_SENDER"));
 		System.setProperty("MODEL_SERVER_URL", dotenv.get("MODEL_SERVER_URL"));
-
+		System.setProperty("MATCHING_SERVER_URL", dotenv.get("MATCHING_SERVER_URL"));
 
 
 

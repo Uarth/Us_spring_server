@@ -1,6 +1,7 @@
 package ybigta.us.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +10,7 @@ import ybigta.us.dto.RecordDto;
 import ybigta.us.service.AmazonS3Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import ybigta.us.service.QuestionService;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -18,13 +20,14 @@ public class AmazonS3Controller {
     @Autowired
     private AmazonS3Service amazonS3Service;
     @Autowired
+    @Qualifier("webClient")
     private WebClient webClient;
     @Autowired
     private QuestionService questionService;
 
     @ResponseBody
     @PostMapping("/upload")
-    public RecordDto upload(@RequestParam MultipartFile file, Integer quesNumber) throws IOException {
+    public RecordDto upload(@RequestParam MultipartFile file, Integer quesNumber, HttpSession session) throws IOException {
         //todo: original file name 쓰지 말고 user 이름 쓰기 (user id나)
         //      session에서 user 정보 가져오기
         String fileName = file.getOriginalFilename();
