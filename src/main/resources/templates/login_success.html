@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login_success</title>
+    <title>Login Success</title>
 </head>
 <body>
-login_success
+<h1>Login Successful</h1>
+<p id="code">Authorization Code: <span id="auth-code"></span></p>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (code) {
+        document.getElementById('auth-code').textContent = code;
+    } else {
+        document.getElementById('code').textContent = 'Authorization code not found.';
+    }
+</script>
 </body>
 </html>
+
