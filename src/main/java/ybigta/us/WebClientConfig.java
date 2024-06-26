@@ -9,10 +9,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientConfig {
     @Value("${model.server.url}")
     private String modelServerUrl;
+    @Value("${MATCHING_SERVER_URL}")
+    private String matchingServerUrl;
+
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
         return builder
                 .baseUrl(modelServerUrl)
+                .build();
+    }
+
+    @Bean
+    public WebClient matchingWebClient(WebClient.Builder builder) {
+        return builder
+                .baseUrl(matchingServerUrl)
                 .build();
     }
 }

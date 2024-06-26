@@ -1,16 +1,32 @@
 package ybigta.us.service;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ybigta.us.controller.SignupController;
 import ybigta.us.domain.User;
+import ybigta.us.dto.SignupDto;
 import ybigta.us.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService {
     private final UserRepository userRepository;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    //Signup 후 userprofile저장
+    public void updateUserProfile(int userId, SignupDto signupdto) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setName(signupdto.getName());
+        user.setPhoneNumber(signupdto.getPhoneNumber());
+        user.setSex(signupdto.getSex());
+        userRepository.save(user);
     }
 
     public User join(User user) {
