@@ -46,7 +46,7 @@ public class UserDashboardResponse {
 
     public String getEmail(){
         return email;
-
+    }
 
     public String getFeatureValue1() {
         return featureValue1;
