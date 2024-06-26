@@ -5,6 +5,7 @@ public class UserDashboardResponse {
     private Boolean sex;
     private String phoneNumber;
     private String email;
+
     private String featureValue1;
     private String featureValue2;
     private String featureValue3;
@@ -27,9 +28,11 @@ public class UserDashboardResponse {
         this.sex = sex;
     }
 
+
     public Boolean getSex() {
         return sex;
     }
+
 
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber=phoneNumber;
@@ -46,6 +49,9 @@ public class UserDashboardResponse {
 
     public String getEmail(){
         return email;
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 
     public String getFeatureValue1() {
