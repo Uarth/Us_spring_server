@@ -23,16 +23,13 @@ public class UserDashboardResponse {
     }
 
 
-
     public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
-
     public Boolean getSex() {
         return sex;
     }
-
 
     public void setPhoneNumber(String phoneNumber){
         this.phoneNumber=phoneNumber;
@@ -50,9 +47,6 @@ public class UserDashboardResponse {
     public String getEmail(){
         return email;
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
-    }
 
     public String getFeatureValue1() {
         return featureValue1;

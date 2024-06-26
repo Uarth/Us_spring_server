@@ -46,7 +46,6 @@ public class DashboardService {
         response.setPhoneNumber(user.getPhoneNumber());
         response.setEmail(user.getEmail());
 
-
         FeatureSelect featureSelect = featureSelectList.get(0);
         response.setFeatureValue1(featureSelect.getFeatureValue1());
         response.setFeatureValue2(featureSelect.getFeatureValue2());
