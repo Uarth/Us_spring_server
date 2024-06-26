@@ -82,4 +82,3 @@ jobs:
             -e AWS_SECRET_ACCESS_KEY=${{secrets.AWS_SECRET_ACCESS_KEY}} \
             ${{secrets.DOCKER_USERNAME}}/app:latest
           docker image prune -a -f
-        
