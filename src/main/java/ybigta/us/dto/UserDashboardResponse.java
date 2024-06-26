@@ -3,6 +3,9 @@ package ybigta.us.dto;
 public class UserDashboardResponse {
     private String name;
     private Boolean sex;
+    private String phoneNumber;
+    private String email;
+
     private String featureValue1;
     private String featureValue2;
     private String featureValue3;
@@ -19,9 +22,33 @@ public class UserDashboardResponse {
         this.name = name;
     }
 
+
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+
+
     public Boolean getSex() {
         return sex;
     }
+
+
+    public void setPhoneNumber(String phoneNumber){
+        this.phoneNumber=phoneNumber;
+    }
+
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+
+
+    public void setEmail(String email){
+        this.email=email;
+    }
+
+    public String getEmail(){
+        return email;
 
     public void setSex(Boolean sex) {
         this.sex = sex;
