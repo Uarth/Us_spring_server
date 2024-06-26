@@ -42,6 +42,8 @@ public class DashboardService {
         UserDashboardResponse response = new UserDashboardResponse();
         response.setName(user.getName());
         response.setSex(user.getSex());
+        response.setPhoneNumber(user.getPhoneNumber());
+        response.setEmail(user.getEmail());
 
         FeatureSelect featureSelect = featureSelectList.get(0);
         response.setFeatureValue1(featureSelect.getFeatureValue1());
