@@ -64,14 +64,32 @@ public class AmazonS3Controller {
                 .subscribe(featureResponse -> {
                     switch (recordDto.getQuestionNumber()) {
                         case 1:
-                            questionService.saveFeatureResponseToQuestion1(featureResponse.toQuestion1Entity(userId));
+                            //만약 id가 이미 있다면 해당 row에 대해 update함
+                            boolean isExist1 = questionService.isExistQuestion1(userId);
+                            if (isExist1){
+                                questionService.updateQuestion1(userId, featureResponse.toQuestion1Entity(userId));
+                            } else {
+                                questionService.saveFeatureResponseToQuestion1(featureResponse.toQuestion1Entity(userId));
+                            }
+
                             break;
+
                         case 2:
-                            questionService.saveFeatureResponseToQuestion2(featureResponse.toQuestion2Entity(userId));
+                            boolean isExist2 = questionService.isExistQuestion2(userId);
+                            if (isExist2){
+                                questionService.updateQuestion2(userId, featureResponse.toQuestion2Entity(userId));
+                            } else {
+                                questionService.saveFeatureResponseToQuestion2(featureResponse.toQuestion2Entity(userId));
+                            }
                             break;
+
                         case 3:
-                            questionService.saveFeatureResponseToQuestion3(featureResponse.toQuestion3Entity(userId));
-                            break;
+                            boolean isExist3 = questionService.isExistQuestion3(userId);
+                            if (isExist3){
+                                questionService.updateQuestion3(userId, featureResponse.toQuestion3Entity(userId));
+                            } else {
+                                questionService.saveFeatureResponseToQuestion3(featureResponse.toQuestion3Entity(userId));
+                            }break;
                     }
                 });
     }
