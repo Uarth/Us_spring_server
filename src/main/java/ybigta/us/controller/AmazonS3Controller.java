@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ybigta.us.domain.User;
 import ybigta.us.dto.FeatureResponse;
 import ybigta.us.dto.RecordDto;
 import ybigta.us.service.AmazonS3Service;
@@ -28,21 +29,22 @@ public class AmazonS3Controller {
     @ResponseBody
     @PostMapping("/upload")
     public RecordDto upload(@RequestParam MultipartFile file, Integer quesNumber, HttpSession session) throws IOException {
-        //todo: original file name 쓰지 말고 user 이름 쓰기 (user id나)
-        //      session에서 user 정보 가져오기
+        User user = (User) session.getAttribute("user");
+        Integer userId = user.getId();
+
         String fileName = file.getOriginalFilename();
         String filePath = "Question" + quesNumber.toString() + "/" + fileName;
         String s3url = amazonS3Service.uploadFileToS3(filePath, file);
         RecordDto recordDto = new RecordDto(filePath, s3url, quesNumber);
 
-        sendGetRequestToFeatureServer(recordDto);
+        sendGetRequestToFeatureServer(recordDto, userId);
 
         return recordDto;
     }
 
     // s3가 들어오면 해댱 question, user에 맞게 feature를 저장함
     @Async
-    public void sendGetRequestToFeatureServer(RecordDto recordDto) {
+    public void sendGetRequestToFeatureServer(RecordDto recordDto, Integer userId) {
 
         webClient.get()
             .uri(uriBuilder -> uriBuilder
@@ -62,13 +64,13 @@ public class AmazonS3Controller {
                 .subscribe(featureResponse -> {
                     switch (recordDto.getQuestionNumber()) {
                         case 1:
-                            questionService.saveFeatureResponseToQuestion1(featureResponse.toQuestion1Entity());
+                            questionService.saveFeatureResponseToQuestion1(featureResponse.toQuestion1Entity(userId));
                             break;
                         case 2:
-                            questionService.saveFeatureResponseToQuestion2(featureResponse.toQuestion2Entity());
+                            questionService.saveFeatureResponseToQuestion2(featureResponse.toQuestion2Entity(userId));
                             break;
                         case 3:
-                            questionService.saveFeatureResponseToQuestion3(featureResponse.toQuestion3Entity());
+                            questionService.saveFeatureResponseToQuestion3(featureResponse.toQuestion3Entity(userId));
                             break;
                     }
                 });
