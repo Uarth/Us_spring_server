@@ -7,5 +7,6 @@ import ybigta.us.dto.FeatureResponse;
 
 public interface Question1Repository extends JpaRepository<Question1, Integer> {
     Question1 save(Question1 question1);
+    Question1 updateQuestion(Integer userId, Question1 updateQuestion );
 
 }
