@@ -43,8 +43,8 @@ public class UserDashboardResponse {
     public void setEmail(String email){
         this.email=email;
     }
-
-    public String getEmail(){
+  
+    public String getEmail() {
         return email;
     }
 
