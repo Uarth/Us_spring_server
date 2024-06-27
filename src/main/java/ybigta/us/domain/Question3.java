@@ -33,4 +33,8 @@ public class Question3 {
     @Convert(converter = ListFloatToStringConverter.class)
     @Column(name = "emb_text", columnDefinition = "json")
     private List<Float> embText;
+
+    public Question3 get() {
+        return this;
+    }
 }
