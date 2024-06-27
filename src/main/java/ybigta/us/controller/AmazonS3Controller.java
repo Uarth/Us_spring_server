@@ -71,7 +71,7 @@ public class AmazonS3Controller {
                             } else {
                                 questionService.saveFeatureResponseToQuestion1(featureResponse.toQuestion1Entity(userId));
                             }
-
+                        
                             break;
 
                         case 2:
@@ -81,6 +81,7 @@ public class AmazonS3Controller {
                             } else {
                                 questionService.saveFeatureResponseToQuestion2(featureResponse.toQuestion2Entity(userId));
                             }
+                        
                             break;
 
                         case 3:
@@ -89,7 +90,9 @@ public class AmazonS3Controller {
                                 questionService.updateQuestion3(userId, featureResponse.toQuestion3Entity(userId));
                             } else {
                                 questionService.saveFeatureResponseToQuestion3(featureResponse.toQuestion3Entity(userId));
-                            }break;
+                            }
+
+                            break;
                     }
                 });
     }
